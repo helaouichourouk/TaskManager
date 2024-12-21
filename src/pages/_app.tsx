@@ -3,7 +3,7 @@ import { CssBaseline, GlobalStyles } from '@mui/material';
 import type { AppProps } from 'next/app';
 import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { useState, useMemo } from 'react';
-import { lightTheme, darkTheme } from './theme';
+import { lightTheme, darkTheme } from '../../theme';
 import "@/styles/globals.css";
 import '@fontsource/roboto';
 import { Layout } from '../components/Layout';
