@@ -84,7 +84,7 @@ export const Layout = ({
                 sx={{
                     flexGrow: 1,
                     p: 3,
-                    marginLeft: isSmallScreen ? 0 : `${drawerWidth}px`,
+                    marginLeft: isSmallScreen ? 0 : -10,
                     transition: theme.transitions.create('margin', {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.leavingScreen,
