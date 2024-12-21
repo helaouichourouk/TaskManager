@@ -1,5 +1,18 @@
 import React from 'react';
-import { Box, Drawer, List, ListItemButton, ListItemText, Toolbar, AppBar, Typography, IconButton, Button } from '@mui/material';
+import {
+    Box,
+    Drawer,
+    List,
+    ListItemButton,
+    ListItemText,
+    Toolbar,
+    AppBar,
+    Typography,
+    IconButton,
+    Button,
+    useTheme,
+    useMediaQuery,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 240;
@@ -14,6 +27,8 @@ export const Layout = ({
     isDarkMode: boolean;
 }) => {
     const [isDrawerOpen, setDrawerOpen] = React.useState(false);
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const toggleDrawer = () => {
         setDrawerOpen(!isDrawerOpen);
@@ -30,7 +45,6 @@ export const Layout = ({
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         My Application
                     </Typography>
-                    {/* Bouton de basculement */}
                     <Button onClick={toggleTheme} color="inherit" variant="outlined">
                         Basculer en mode {isDarkMode ? 'Clair' : 'Sombre'}
                     </Button>
@@ -39,11 +53,12 @@ export const Layout = ({
 
             {/* Drawer (Sidebar) */}
             <Drawer
-                variant="persistent"
+                variant={isSmallScreen ? 'temporary' : 'persistent'}
                 anchor="left"
                 open={isDrawerOpen}
+                onClose={toggleDrawer}
                 sx={{
-                    width: drawerWidth,
+                    width: isSmallScreen ? 'auto' : drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
@@ -54,7 +69,7 @@ export const Layout = ({
                 <Toolbar />
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
-                        {['Home', 'About', 'Contact', 'Settings'].map((text, index) => (
+                        {['Home', 'About', 'Contact', 'Settings'].map((text) => (
                             <ListItemButton key={text}>
                                 <ListItemText primary={text} />
                             </ListItemButton>
@@ -69,12 +84,11 @@ export const Layout = ({
                 sx={{
                     flexGrow: 1,
                     p: 3,
-                    marginLeft: isDrawerOpen ? `${drawerWidth}px` : 0,
-                    transition: (theme) =>
-                        theme.transitions.create('margin', {
-                            easing: theme.transitions.easing.sharp,
-                            duration: theme.transitions.duration.leavingScreen,
-                        }),
+                    marginLeft: isSmallScreen ? 0 : `${drawerWidth}px`,
+                    transition: theme.transitions.create('margin', {
+                        easing: theme.transitions.easing.sharp,
+                        duration: theme.transitions.duration.leavingScreen,
+                    }),
                 }}
             >
                 <Toolbar />
