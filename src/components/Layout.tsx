@@ -14,6 +14,7 @@ import {
     useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -43,11 +44,11 @@ export const Layout = ({
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        My Application
+                        Task management
                     </Typography>
-                    <Button onClick={toggleTheme} color="inherit" variant="outlined">
-                        Basculer en mode {isDarkMode ? 'Clair' : 'Sombre'}
-                    </Button>
+                    <IconButton color="inherit" onClick={toggleTheme}>
+                        {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+                    </IconButton>
                 </Toolbar>
             </AppBar>
 
